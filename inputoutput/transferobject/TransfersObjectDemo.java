@@ -9,11 +9,12 @@ public class TransfersObjectDemo {
   public static void main(String[] args) {
 
     TransfeersObject tr = new TransfeersObject();
+
     try {
       FileInputStream in = new FileInputStream("text.txt");
       FileOutputStream out = new FileOutputStream("text2.txt");
-      int num = tr.transfer(in, out, 3, 4);
-      System.out.printf("%s bytes transefered .", num);
+      tr.transfer(in, out, 10,0);
+    //  System.out.printf("%s bytes transefered .", num);
     } catch (FileNotFoundException e) {
       e.printStackTrace();
     } catch (IOException e) {

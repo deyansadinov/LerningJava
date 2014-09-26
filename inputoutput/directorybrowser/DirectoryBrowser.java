@@ -1,14 +1,7 @@
 package com.clouway.inputoutput.directorybrowser;
 
-//Да се направи клас DirectoryBrowser, който да извежда съдържанието на директория от файловата система.
-//        Класът има метод listContent(String path).
-//        Параметърът path е името на директория или файл с пълния път преди него (пример: H:\development\, C:\MyFile.jpg).
-//        Методът проверява дали path сочи към файл или директория.
-//        Ако сочи към файл - извежда се съобщение, че е подадено име на файл.Ако сочи към директория -
-//        извежда се списък с имената на всички файлове и директории, съдържащи се в нея.
-//        Пример: path= H:\development\, съдържа директориите Proj1, MyProj и файлът Proba.txt.
-
 import java.io.File;
+import java.io.IOException;
 
 public class DirectoryBrowser {
   /**
@@ -18,25 +11,28 @@ public class DirectoryBrowser {
    * @param path curent path
    * @return
    */
-  public String listContainer(String path) {
-
+  public void listContainer(String path) throws IOException {
     File file = new File(path);
+    StringBuilder print = new StringBuilder();
 
-    if (file.isFile()) {
-      System.out.println("File :" + file.getName() + file.getPath());
-      return file.getName();
-    }
+    browser(file, print);
+    System.out.println(print.toString());
 
-    if (file.isDirectory()) {
-      System.out.println("Dir :" + file.getName() + file.getPath());
-      for (String x : file.list()) {
-        System.out.println(x);
-        listContainer(path + "/" + x);
-      }
-      return file.getName();
-    }
-    return null;
   }
 
+  public void browser(File file, StringBuilder txt) {
+    if (file.isFile()) {
+      txt.append(file.getParentFile());
+      txt.append(" File :");
+      txt.append(file.getName());
+    }
+    if (file.isDirectory()) {
+      txt.append(" Dir :");
+      txt.append(file.getName());
 
+      for (File x : file.listFiles()) {
+        browser(x, txt);
+      }
+    }
+  }
 }
