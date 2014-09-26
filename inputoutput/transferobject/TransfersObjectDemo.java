@@ -13,7 +13,7 @@ public class TransfersObjectDemo {
     try {
       FileInputStream in = new FileInputStream("text.txt");
       FileOutputStream out = new FileOutputStream("text2.txt");
-      tr.transfer(in, out, 10,0);
+      tr.transfer(in, out, 49,0);
     //  System.out.printf("%s bytes transefered .", num);
     } catch (FileNotFoundException e) {
       e.printStackTrace();

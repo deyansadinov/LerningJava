@@ -9,16 +9,19 @@ public class TransfeersObject {
 
   public void transfer(InputStream in, OutputStream out, int numberOfBytes, int offset) throws IOException {
     BufferedInputStream buf = new BufferedInputStream(in);
-//    System.out.println(buf.);
-    byte[] byteStep = new byte[100];
-    int step=numberOfBytes;
-    if(byteStep.length<step){
-      step=byteStep.length;
-    }
 
+    byte[] byteStep = new byte[50];
 
-    while (buf.read(byteStep,0, step) != -1) {
-      out.write(byteStep,offset,numberOfBytes);
+    //int step=10;
+
+    while (buf.read(byteStep,0,byteStep.length) != -1) {
+      if(numberOfBytes==-1){
+        out.write(byteStep,offset,byteStep.length);
+      }else {
+        out.write(byteStep,offset,numberOfBytes);
+        return;
+      }
+
 
     }
   }
