@@ -9,6 +9,7 @@ import java.io.IOException;
 public class FileReverser {
   /**
    * Reverse the text from a file
+   *
    * @param fileName
    * @throws IOException
    */
@@ -26,16 +27,21 @@ public class FileReverser {
     reader.close();
   }
   /**
-   *Saves to a file.
+   * Saves to a file.
+   *
    * @param fileName
    * @param text
    * @throws IOException
    */
-  private void saveToFile(String fileName, String text) throws IOException {
-    BufferedWriter writer = new BufferedWriter(new FileWriter(fileName));
+  private void saveToFile(String fileName, String text){
+    BufferedWriter writer = null;
+    try {
+      writer = new BufferedWriter(new FileWriter(fileName));
+      writer.write(text);
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
 
-    writer.write(text);
-
-    writer.close();
   }
 }

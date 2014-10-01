@@ -11,28 +11,31 @@ public class DirectoryBrowser {
    * @param path curent path
    * @return
    */
-  public void listContainer(String path) throws IOException {
+  public String listContainer(String path) throws IOException {
     File file = new File(path);
     StringBuilder print = new StringBuilder();
 
-    browser(file, print);
-    System.out.println(print.toString());
+   StringBuilder text= browse(file, print);
 
+  return text.toString();
   }
 
-  public void browser(File file, StringBuilder txt) {
+  public StringBuilder browse(File file, StringBuilder txt) {
     if (file.isFile()) {
       txt.append(file.getParentFile());
       txt.append(" File :");
       txt.append(file.getName());
+      txt.append("\n");
     }
     if (file.isDirectory()) {
       txt.append(" Dir :");
       txt.append(file.getName());
+      txt.append("\n");
 
-      for (File x : file.listFiles()) {
-        browser(x, txt);
+      for (File innerFile : file.listFiles()) {
+        browse(innerFile, txt);
       }
     }
+    return txt;
   }
 }

@@ -8,16 +8,21 @@ import java.io.IOException;
 public class TransfersObjectDemo {
   public static void main(String[] args) {
 
-    TransfeersObject tr = new TransfeersObject();
+
 
     try {
       FileInputStream in = new FileInputStream("text.txt");
       FileOutputStream out = new FileOutputStream("text2.txt");
-      tr.transfer(in, out, 49,0);
-    //  System.out.printf("%s bytes transefered .", num);
-    } catch (FileNotFoundException e) {
+      TransfeersObject tr = new TransfeersObject();
+
+      int numberOfBytes=24;
+      int num=tr.transfer(in, out,numberOfBytes,0);
+      System.out.printf(" In  %s step .%s bytes transfered.", num,numberOfBytes);
+    }
+    catch (FileNotFoundException e) {
       e.printStackTrace();
-    } catch (IOException e) {
+    }
+    catch (IOException e) {
       e.printStackTrace();
     }
 

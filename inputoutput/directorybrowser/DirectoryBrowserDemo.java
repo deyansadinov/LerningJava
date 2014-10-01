@@ -6,7 +6,8 @@ public class DirectoryBrowserDemo {
   public static void main(String[] args) throws IOException {
 
     DirectoryBrowser browser = new DirectoryBrowser();
-    browser.listContainer("/home/clouway/Test");
+
+    System.out.println(browser.listContainer("/home/clouway/Test"));
 
   }
 }
