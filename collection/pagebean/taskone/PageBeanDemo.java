@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by clouway on 14-9-19.
+ * @ author Ivan Genchev <ivan.genchev1989@gmail.com> 16:44 Oct 14-9-19
  */
+
 public class PageBeanDemo {
   public static void main(String[] args) {
     List<Integer> elements = new ArrayList<>();
+
     elements.add(1);
     elements.add(2);
     elements.add(3);
@@ -21,16 +23,16 @@ public class PageBeanDemo {
     elements.add(10);
     
     PageBean pb = new PageBean(elements, 3);
-    //pb.start();
 
-    pb.next();
-    pb.next();
-    pb.next();
-    pb.next();
-    pb.previous();
+    System.out.println( pb.next().toString());
+    System.out.println( pb.next().toString());
+    System.out.println( pb.next().toString());
+    System.out.println( pb.previous().toString());
 
 
-    System.out.printf("The curent page  is %s .", pb.getCurrentPageNumber());
+
+
+    System.out.printf("The current page  is %s .", pb.getCurrentPageNumber());
     System.out.printf("Is there a next element - %s .", pb.hasNext());
     System.out.printf("Is there a previous element - %s .", pb.hasPrevious());
     System.out.println();

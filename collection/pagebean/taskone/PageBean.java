@@ -1,43 +1,19 @@
 package com.clouway.collection.pagebean.taskone;
 
-
-//next() - връща следващите няколко елемента от списъка;
-//        previous() - връща предишните няколко елемента на списъка;
-//        hasNext() - връща дали има следващи елементи;
-//        hasPrevious() - връща дали има предишни елементи;
-//        firstPage() - връща първата страница и я прави текуща;
-//        lastPage() - връща последната страница и я прави текуща;
-//        getCurrentPageNumber() - връща номера на текущата страница.
-
-
-//При стартиране на програмата да се показва първата страница от списъка чрез извикване на next().
-// Методите next() и previous() да могат да се извикват от конзолата.
-//        Когато е показана първата страница (първите няколко елемента от списъка) и се
-// извика метода previous () - да се изписва съобщение за грешка.
-//        Ако последната страница на списъка е с по-малко от pageSize елементи и се извика метода next
-// () да НЕ се получава грешка.
-
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Scanner;
 
-/**
- * <T> parameter.
- */
 public class PageBean {
-  private boolean programStart = true;
-  private final int PAGESIZE;
-  private final List ELEMENTS;
 
+  private final int pagesize;
+  private final List<Integer> elements;
   private int index = 0;
   private int pageNumber = 0;
-  private Scanner scanner = new Scanner(System.in);
 
-  public PageBean(List elements, int pageSize) {
-    this.PAGESIZE = pageSize;
-    this.ELEMENTS = elements;
+  public PageBean(List<Integer> elements, int pageSize) {
+    this.pagesize = pageSize;
+    this.elements = elements;
   }
 
   /**
@@ -46,10 +22,7 @@ public class PageBean {
    * @return
    */
   public boolean hasNext() throws IndexOutOfBoundsException {
-    if (index < ELEMENTS.size()) {
-      return true;
-    }
-    return false;
+    return index < elements.size();
   }
 
   /**
@@ -58,7 +31,7 @@ public class PageBean {
    * @return
    */
   public boolean hasPrevious() {
-    for (ListIterator it = ELEMENTS.listIterator(index - 1); it.hasPrevious(); ) {
+    for (ListIterator it = elements.listIterator(index - 1); it.hasPrevious(); ) {
       if (it.hasPrevious()) {
         return true;
       }
@@ -70,7 +43,7 @@ public class PageBean {
    * @return the current page number.
    */
   public int getCurrentPageNumber() {
-    if (pageNumber > ELEMENTS.size() / PAGESIZE) {
+    if (pageNumber > elements.size() / pagesize) {
       pageNumber = 1;
     }
     return pageNumber;
@@ -79,56 +52,53 @@ public class PageBean {
   public void firstPage() {
     pageNumber = 1;
     index = 1;
-    //index = ELEMENTS.indexOf(pageNumber+PAGESIZE);
   }
 
   /**
    * Gets the last page and makes it to be the current one.
    */
   public void lastPage() {
-    pageNumber = ELEMENTS.size() / PAGESIZE;
-
-    index = ELEMENTS.lastIndexOf(ELEMENTS.size()) + 1;
-
+    pageNumber = elements.size() / pagesize;
+    index = elements.lastIndexOf(elements.size()) + 1;
   }
 
   /**
    * Prints the next elements.
    */
-  public void next() {
-    if ((index) >= ELEMENTS.size()) {
+  public List<Object> next() {
+    List<Object> output = new ArrayList<>();
+    if ((index) >= elements.size()) {
       System.out.println("Back to the start of the page.");
       index = 0;
     }
-    if ((index + PAGESIZE) > ELEMENTS.size()) {
-      System.out.println(ELEMENTS.get(index));
+    if ((index + pagesize) > elements.size()) {
+      System.out.println(elements.get(index));
     } else {
-      for (Object d : ELEMENTS.subList(index, PAGESIZE + index)) {
-        System.out.println(d);
+      for (Object d : elements.subList(index, pagesize + index)) {
+        output.add(d);
       }
     }
-
-    index += PAGESIZE;
+    index += pagesize;
     System.out.println();
     pageNumber++;
+    return output;
   }
 
   /**
    * Rerturns the previous elemnts it they exist
    */
-  public void previous() {
-
-    index -= PAGESIZE * 2;
-    for (Object d : ELEMENTS.subList(index, index + PAGESIZE)) {
-      System.out.println(d);
-
+  public List<Object> previous() {
+    List<Object> output = new ArrayList<>();
+    index -= pagesize * 2;
+    for (Object d : elements.subList(index, index + pagesize)) {
+      output.add(d);
     }
-    index += PAGESIZE;
+    index += pagesize;
     System.out.println();
     if (index < 0) {
       throw new IndexOutOfBoundsException();
     }
     pageNumber--;
+    return output;
   }
-
 }

@@ -13,20 +13,20 @@ public class DirectoryBrowser {
    */
   public String listContainer(String path) throws IOException {
     File file = new File(path);
-    StringBuilder print = new StringBuilder();
 
-   StringBuilder text= browse(file, print);
+    StringBuilder text = browse(file, new StringBuilder());
 
-  return text.toString();
+    return text.toString();
   }
 
-  public StringBuilder browse(File file, StringBuilder txt) {
+  private StringBuilder browse(File file, StringBuilder txt) {
     if (file.isFile()) {
       txt.append(file.getParentFile());
       txt.append(" File :");
       txt.append(file.getName());
       txt.append("\n");
     }
+
     if (file.isDirectory()) {
       txt.append(" Dir :");
       txt.append(file.getName());
@@ -36,6 +36,7 @@ public class DirectoryBrowser {
         browse(innerFile, txt);
       }
     }
+
     return txt;
   }
 }

@@ -15,9 +15,9 @@ public class TransfersObjectDemo {
       FileOutputStream out = new FileOutputStream("text2.txt");
       TransfeersObject tr = new TransfeersObject();
 
-      int numberOfBytes=24;
+      int numberOfBytes=0;
       int num=tr.transfer(in, out,numberOfBytes,0);
-      System.out.printf(" In  %s step .%s bytes transfered.", num,numberOfBytes);
+      System.out.printf("%s bytes transfered.",num);
     }
     catch (FileNotFoundException e) {
       e.printStackTrace();

@@ -3,14 +3,10 @@ package com.clouway.inputoutput.console;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 
-/**
- * Created by clouway on 14-9-17.
- */
 public class DataReaderDemo {
   public static void main(String[] args) throws FileNotFoundException {
 
     InputStream in = DataReaderDemo.class.getResourceAsStream("sample.txt");
-
     System.out.println();
     DataReader fileReader = new DataReader(in);
 

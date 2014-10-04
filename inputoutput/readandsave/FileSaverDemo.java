@@ -16,7 +16,7 @@ public class FileSaverDemo {
     FileSaver sf = new FileSaver(fileName,breakPoint);
 
     try {
-      sf.write();
+      sf.writeToFile();
     } catch (IOException e) {
       e.printStackTrace();
     }

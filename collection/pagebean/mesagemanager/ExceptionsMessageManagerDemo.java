@@ -1,22 +1,28 @@
 package com.clouway.collection.pagebean.mesagemanager;
 
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Map;
 
 /**
- * Created by clouway on 14-9-25.
+ * @ author Ivan Genchev <ivan.genchev1989@gmail.com> 16:45 Oct 14-9-25
  */
 public class ExceptionsMessageManagerDemo {
   public static void main(String[] args) {
 
-    Hashtable<String,String> exceptions = new Hashtable<String,String>();
+    Map<String, String> exceptions = new HashMap<>();
 
     ExceptionsMessageManager emm = new ExceptionsMessageManager(exceptions);
 
-    emm.registerErrorMessage("Wrong card number","This is not the card number we expected.");
-   // emm.registerErrorMessage("Wrong card number","This is not the card number we expected.");
+    try {
+      emm.registerErrorMessage("4", "This is not the card number we expected.");
+      emm.registerErrorMessage("1", "Wrong PIN");
+      emm.registerErrorMessage("2", "Invalid number of debit card");
+      emm.registerErrorMessage("3", "Invalid postcode");
+      System.out.println(emm.raiseError("3"));
+      System.out.println(emm.getErrorMessages());
 
-    emm.getErrorMessages();
-
+    } catch (MessageExistsException | KeyIsNotFreeException e) {
+      e.getMessage();
+    }
   }
 }
